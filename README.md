@@ -76,6 +76,14 @@ alpr:
 ```
 
 ---
+## 🎬 Demo
+
+Quick Preview
+
+A short demo showing vehicle detection + license plate recognition running end-to-end.
+
+👉 ▶️ Watch demo video
+![ALPR Demo](demo.gif)
 
 ## 🚀 Getting Started (Local)
 
