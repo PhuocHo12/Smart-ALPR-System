@@ -3,9 +3,9 @@ class ALPRPipeline:
         self.vehicle_detector = vehicle_detector
         self.alpr_engine = alpr_engine
 
-    def process(self, frame, detect_threshold=0.6, recog_threshold=0.6):
+    def process(self, frame):
         outputs = []
-        vehicles = self.vehicle_detector.detect(frame, conf=detect_threshold)
+        vehicles = self.vehicle_detector.detect(frame)
 
         for v in vehicles:
             x1, y1, x2, y2 = v["bbox"]
@@ -14,7 +14,7 @@ class ALPRPipeline:
             if vehicle_crop.size == 0:
                 continue
 
-            plates = self.alpr_engine.recognize(vehicle_crop, recog_threshold)
+            plates = self.alpr_engine.recognize(vehicle_crop)
 
             outputs.append({
                 "vehicle_bbox": v["bbox"],

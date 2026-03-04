@@ -7,7 +7,7 @@ from utils.draw import draw_results
 
 
 def main():
-    detector = VehicleDetector("models/yolo26n.pt")
+    detector = VehicleDetector("configs/yolo.yaml")
     alpr = FastALPREngine()
 
     pipeline = ALPRPipeline(detector, alpr)
@@ -23,7 +23,7 @@ def main():
         ## ROI Detection + ALPR
         roi_frame = frame[roi_y1:roi_y2, roi_x1:roi_x2]
         frame = cv2.rectangle(frame, (roi_x1, roi_y1), (roi_x2, roi_y2), (0, 255, 0), 2)  # Draw ROI
-        results = pipeline.process(roi_frame, detect_threshold=0.6, recog_threshold=0.6)
+        results = pipeline.process(roi_frame)
         frame[roi_y1:roi_y2, roi_x1:roi_x2] = draw_results(roi_frame, results)
         vidWriter.write(frame)
     cap.release()
